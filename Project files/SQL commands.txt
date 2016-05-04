@@ -1,0 +1,9 @@
+SELECT * FROM `movies` WHERE `movieRating` = "R";
+SELECT * FROM `movies` WHERE `movieRating` = "R" OR `movieRating` = "X";
+SELECT `movieName` FROM `movies` WHERE `movieRating` = "PG";
+SELECT `movieName` FROM `movies` WHERE `movieRuntime` < "130";
+SELECT `movieName` FROM `movies` WHERE `movieGenre` = "Drama";
+SELECT `movieName` FROM `movies` WHERE `actorName` = "Christopher Nolan";
+SELECT `actorName` FROM `movies` WHERE `movieName` = "The Simpsons Movie";
+SELECT `movieName`, `movieRuntime` FROM `movies` WHERE `movieRating` = "G" OR `movieRating` = "PG";
+SELECT `movieName`, `moviePoster` FROM `movies` WHERE `movieName` LIKE "B_%";
