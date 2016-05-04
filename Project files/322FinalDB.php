@@ -39,11 +39,47 @@ if ($conn->connect_error) {
   		<option value="directors">Directors</option>
   		<option value="movies">Movies</option>
   	</select>
+    <input type="submit" name ="send" value="Submit"/>
 </form>
 		<table style="width:100%">
 		<?php
+    if(isset($_POST['send'])) {
     $selectOption = $_POST['selectedList'];
+    switch ($selectOption) {
+      case 'actors':
+        $sql = "SELECT * FROM actors";
+        $result = mysqli_query($conn, $sql);
         while($row = $result->fetch_assoc()) {
+          echo "<tr><td>" . $row["actorName"]. "</td>
+          <td>" . $row["actorGender"]. "</td>
+          <td>" . $row["actorAge"]. "</td>
+          </tr>";
+        }
+        break;
+      case 'directors':
+        $sql = "SELECT * FROM directors";
+        $result = mysqli_query($conn, $sql);
+        while($row = $result->fetch_assoc()) {
+          echo "<tr><td>" . $row["directorName"]. "</td>
+          <td>" . $row["directorAge"]. "</td>
+          </tr>";
+        }
+        break;
+      case 'movies':
+        $sql = "SELECT * FROM movies";
+        $result = mysqli_query($conn, $sql);
+        while($row = $result->fetch_assoc()) {
+          echo "<tr><td><img src=" . $row["moviePoster"]. "</td>
+          <td>" . $row["movieRating"]. "</td>
+          <td>" . $row["movieRuntime"]. "</td>
+          <td>" . $row["moviePlot"]. "</td>
+          <td>" . $row["movieGenre"]. "</td>
+          </tr>";
+        }
+        break;
+
+      default:
+        break;
     }
   }
   ?>
