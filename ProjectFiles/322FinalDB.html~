@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head><title>Team 8 Movie Database</title></head>
+
+<style>
+	header{
+		font-family: arial;
+		font-size: 18px;
+		text-align: center;
+		color: white;
+	}
+	body{
+		background: url("http://www.likehdwallpaper.com/wp-content/uploads/Simple%20Background/FTP1/2560x1440/Simple%20green%20background%20Wallpaper%202560x1440.jpg");
+		background-position: center;
+	}
+	p{
+		font-family: arial;
+		text-align: center;
+		display: inline;
+		color: white;
+	}
+	select{
+		position: relative;
+	}
+	form{
+		position: relative;
+	}
+	form[type="submit"]{
+		border-radius: 5px;
+		background: black;
+		color: white;
+	}
+</style>
+<header>
+	<h1>Team 8 Movie Database</h1>
+	<h3>Welcome to Team 8's Movie DB!</h3>
+</header>
+
+<body>
+	<p>View all:</p>
+	<select>
+		<option value="actors">Actors</option>
+		<option value="directors">Directors</option>
+		<option value="movies">Movies</option>
+	</select>
+	<form action="script.php" method="get">
+		<input type="submit" value="Go">
+	</form>
+	
+</body>
+
+
+</html>
