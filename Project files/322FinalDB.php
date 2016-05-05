@@ -4,7 +4,6 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "movie_proj";
-
 // Create connection
 $conn = new mysqli($servername, $username, $password,$dbname);
 // Check connection
@@ -38,6 +37,7 @@ if ($conn->connect_error) {
   		<option value="actors">Actors</option>
   		<option value="directors">Directors</option>
   		<option value="movies">Movies</option>
+		<option value="actors join movies">Actors Join Movies</option>
   	</select>
     <input type="submit" name ="send" value="Submit"/>
 </form>
@@ -77,7 +77,17 @@ if ($conn->connect_error) {
           </tr>";
         }
         break;
-
+	  case 'actors join movies':
+		$sql = ("SELECT actorName, actorAge, movieName, movieRating FROM actors JOIN Movies WHERE actorID=movieID");
+		$result = mysqli_query($conn, $sql);
+		while($row = $result->fetch_assoc()) {
+          echo "<tr><td><img src=" . $row["actorName"]. "</td>
+          <td>" . $row["actorAge"]. "</td>
+          <td>" . $row["movieName"]. "</td>
+          <td>" . $row["movieRating"]. "</td>
+          </tr>";
+        }
+		break;
       default:
         break;
     }
