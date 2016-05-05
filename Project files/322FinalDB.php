@@ -39,6 +39,7 @@ if ($conn->connect_error) {
   		<option value="movies">Movies</option>
 		  <option value="actors join movies">Actors Join Movies</option>
       <option value="directors join movies">Directors Join Movies</option>
+	  <option value="insert actor">Insert New Actor</option>
   	</select>
     <input type="submit" name ="send" value="Submit"/>
 </form>
@@ -101,6 +102,18 @@ if ($conn->connect_error) {
           </tr>";
       }
 		  break;
+      case 'insert actor':
+        $sql = "INSERT INTO actors (actorID, actorName, actorGender, actorAge)
+VALUES ('20', 'Matt Damon', 'Male', '45')";
+        $sql = "SELECT * FROM actors";		
+        $result = mysqli_query($conn, $sql);
+        while($row = $result->fetch_assoc()) {
+          echo "<tr><td>" . $row["actorName"]. "</td>
+          <td>" . $row["actorAge"]. "</td>
+          <td>" . $row["actorGender"]. "</td>
+          </tr>";
+        }
+        break;
     default:
       break;
     }
