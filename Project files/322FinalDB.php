@@ -78,10 +78,11 @@ if ($conn->connect_error) {
         }
         break;
 	  case 'actors join movies':
-		$sql = ("SELECT actorName, actorAge, movieName, movieRating FROM actors JOIN Movies WHERE actorID=movieID");
+		$sql = "SELECT * FROM Movies m, Acting ag, Actors ac
+    WHERE m.movieID = ag.movieID AND ac.actorID = ag.movieID";
 		$result = mysqli_query($conn, $sql);
 		while($row = $result->fetch_assoc()) {
-          echo "<tr><td><img src=" . $row["actorName"]. "</td>
+          echo "<tr><td>" . $row["actorName"]. "</td>
           <td>" . $row["actorAge"]. "</td>
           <td>" . $row["movieName"]. "</td>
           <td>" . $row["movieRating"]. "</td>
