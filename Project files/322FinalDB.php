@@ -39,7 +39,7 @@ if ($conn->connect_error) {
   		<option value="movies">Movies</option>
 		  <option value="actors join movies">Actors Join Movies</option>
       <option value="directors join movies">Directors Join Movies</option>
-	  <option value="insert actor">Insert New Actor</option>
+	  <option value="insert actor">Insert Matt Damon</option>
   	</select>
     <input type="submit" name ="send" value="Submit"/>
 </form>
@@ -80,7 +80,7 @@ if ($conn->connect_error) {
         }
         break;
 	  case 'actors join movies':
-		  $sql = "SELECT * FROM Movies m, Acting ag, Actors ac
+		  $sql = "SELECT DISTINCT * FROM Movies m, Acting ag, Actors ac
       WHERE m.movieID = ag.movieID AND ac.actorID = ag.actorID";
 		  $result = mysqli_query($conn, $sql);
 		  while($row = $result->fetch_assoc()) {
@@ -90,8 +90,9 @@ if ($conn->connect_error) {
           <td>" . $row["movieRating"]. "</td>
           </tr>";
         }
+      break;
     case 'directors join movies':
-    	$sql = "SELECT * FROM Movies m, Directing dg, Directors dc
+    	$sql = "SELECT DISTINCT * FROM Movies m, Directing dg, Directors dc
       WHERE m.movieID = dg.movieID AND dc.directorID = dg.directorID";
     	$result = mysqli_query($conn, $sql);
     	while($row = $result->fetch_assoc()) {
@@ -104,8 +105,12 @@ if ($conn->connect_error) {
 		  break;
       case 'insert actor':
         $sql = "INSERT INTO actors (actorID, actorName, actorGender, actorAge)
-VALUES ('20', 'Matt Damon', 'Male', '45')";
-        $sql = "SELECT * FROM actors";		
+        VALUES ('20', 'Matt Damon', 'Male', '45')";
+        $result = mysqli_query($conn, $sql);
+        $sql = "INSERT INTO acting (movieID, actorID)
+        VALUES ('7','20')";
+        $result = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM actors";
         $result = mysqli_query($conn, $sql);
         while($row = $result->fetch_assoc()) {
           echo "<tr><td>" . $row["actorName"]. "</td>
