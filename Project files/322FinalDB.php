@@ -37,7 +37,8 @@ if ($conn->connect_error) {
   		<option value="actors">Actors</option>
   		<option value="directors">Directors</option>
   		<option value="movies">Movies</option>
-		<option value="actors join movies">Actors Join Movies</option>
+		  <option value="actors join movies">Actors Join Movies</option>
+      <option value="directors join movies">Directors Join Movies</option>
   	</select>
     <input type="submit" name ="send" value="Submit"/>
 </form>
@@ -78,19 +79,30 @@ if ($conn->connect_error) {
         }
         break;
 	  case 'actors join movies':
-		$sql = "SELECT * FROM Movies m, Acting ag, Actors ac
-    WHERE m.movieID = ag.movieID AND ac.actorID = ag.movieID";
-		$result = mysqli_query($conn, $sql);
-		while($row = $result->fetch_assoc()) {
+		  $sql = "SELECT * FROM Movies m, Acting ag, Actors ac
+      WHERE m.movieID = ag.movieID AND ac.actorID = ag.actorID";
+		  $result = mysqli_query($conn, $sql);
+		  while($row = $result->fetch_assoc()) {
           echo "<tr><td>" . $row["actorName"]. "</td>
           <td>" . $row["actorAge"]. "</td>
           <td>" . $row["movieName"]. "</td>
           <td>" . $row["movieRating"]. "</td>
           </tr>";
         }
-		break;
-      default:
-        break;
+    case 'directors join movies':
+    	$sql = "SELECT * FROM Movies m, Directing dg, Directors dc
+      WHERE m.movieID = dg.movieID AND dc.directorID = dg.directorID";
+    	$result = mysqli_query($conn, $sql);
+    	while($row = $result->fetch_assoc()) {
+          echo "<tr><td>" . $row["directorName"]. "</td>
+          <td>" . $row["directorAge"]. "</td>
+          <td>" . $row["movieName"]. "</td>
+          <td>" . $row["movieRating"]. "</td>
+          </tr>";
+      }
+		  break;
+    default:
+      break;
     }
   }
   ?>
